@@ -1,6 +1,6 @@
 namespace Intern;
 
-public class RoleService: IRoleService
+public class RoleService : IRoleService
 {
     public RoleDomain GenerateRoleBy(RoleDto dto)
     {
@@ -8,18 +8,9 @@ public class RoleService: IRoleService
         {
             new MagicianFilter(),
             new WarriorFilter(),
-            new BeginnerFilter(),
+            new BeginnerFilter()
         };
-        
-        foreach (var filter in roleFilters)
-        {
-            if (filter.IsMatch(dto))
-            {
-                return dto.ToRoleDomain(filter.GetJob());
-            }
-        }
-        
 
-        return dto.ToRoleDomain(Job.Beginner);
+        return dto.ToRoleDomain(roleFilters.First(x => x.IsMatch(dto)).GetJob());
     }
 }
