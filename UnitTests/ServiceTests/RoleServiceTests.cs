@@ -49,4 +49,21 @@ public class RoleServiceTests
         });
     }
 
+    [Test]
+    public void should_get_magician()
+    {
+        var role = _roleService.GenerateRoleBy(new RoleDto
+        {
+            Weapon = Weapon.Stick,
+            Level = 10
+        });
+
+        role.Should().BeEquivalentTo(new RoleDomain()
+        {
+            Level = 10,
+            Weapon = Weapon.Stick,
+            Job = Job.Magician
+        });
+    }
+
 }
