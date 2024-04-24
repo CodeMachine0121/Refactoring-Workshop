@@ -7,7 +7,12 @@ public class RoleController(IRoleService roleService) : ControllerBase
 
     public RoleResponse GetRoleBy(RoleRequest request)
     {
-        roleService.GenerateRoleBy(new RoleDto());
-        return new RoleResponse();
+        var domain = roleService.GenerateRoleBy(new RoleDto());
+
+        return new RoleResponse()
+        {
+            Status = ApiStatus.Success,
+            Data = domain
+        };
     }
 }
