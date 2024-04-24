@@ -4,9 +4,17 @@ public class RoleService: IRoleService
 {
     public RoleDomain GenerateRoleBy(RoleDto dto)
     {
-        if (IsMatchMagician(dto))
+        var roleFilters = new List<IRoleFilter>()
         {
-            return dto.ToRoleDomain(Job.Magician);
+            new MagicianFilter(),
+        };
+        
+        foreach (var filter in roleFilters)
+        {
+            if (filter.IsMatch(dto))
+            {
+                return dto.ToRoleDomain(filter.GetJob());
+            }
         }
         
         if (IsMatchWarrior(dto))
@@ -22,8 +30,24 @@ public class RoleService: IRoleService
         return dto.Level >= 10 && dto.Weapon == Weapon.Sword;
     }
 
-    private static bool IsMatchMagician(RoleDto dto)
+}
+
+
+public class MagicianFilter : IRoleFilter
+{
+    public bool IsMatch(RoleDto dto)
     {
         return dto.Level >= 10 && dto.Weapon == Weapon.Stick;
     }
+
+    public Job GetJob()
+    {
+       return Job.Magician ;
+    }
+}
+
+public interface IRoleFilter
+{
+    bool IsMatch(RoleDto dto);
+    Job GetJob();
 }
