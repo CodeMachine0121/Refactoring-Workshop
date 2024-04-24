@@ -1,5 +1,5 @@
 namespace Intern_Refactoring;
 
-public class RoleSponse
+public class RoleResponse
 {
 }
