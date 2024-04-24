@@ -8,7 +8,7 @@ public class RoleService: IRoleService
         {
             Level = dto.Level,
             Weapon = dto.Weapon,
-            Job = "Beginner"
+            Job = Job.Beginner
         };
     }
 }

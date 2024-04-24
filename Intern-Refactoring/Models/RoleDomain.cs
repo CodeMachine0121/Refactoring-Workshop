@@ -4,6 +4,6 @@ namespace Intern;
 public class RoleDomain
 {
     public int Level { get; set; }
-    public string Weapon { get; set; }
-    public string Job { get; set; }
+    public Weapon Weapon { get; set; }
+    public Job Job { get; set; }
 }
