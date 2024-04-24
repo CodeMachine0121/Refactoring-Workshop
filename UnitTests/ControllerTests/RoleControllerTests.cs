@@ -29,7 +29,7 @@ public class RoleControllerTests
             Weapon = "any-weapon"
         });
 
-        _roleService.Received().GenerateRoleBy(Arg.Any<RoleDto>());
+        _roleService.Received().GenerateRoleBy(Arg.Is<RoleDto>(r => r.Level == 1 && r.Weapon == Weapon.Unkown));
     }
 
     [Test]
