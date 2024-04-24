@@ -1,3 +1,4 @@
+using Intern;
 using Intern_Refactoring.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddTransient<IRoleService, RoleService>();
 
 var app = builder.Build();
 
@@ -16,6 +18,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.MapControllers();
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
