@@ -1,6 +1,5 @@
 using FluentAssertions;
 using Intern;
-using Microsoft.VisualStudio.TestPlatform.Utilities;
 using NUnit.Framework;
 
 namespace TestProject1.ServiceTests;
@@ -30,6 +29,23 @@ public class RoleServiceTests
             Level = 1,
             Weapon = Weapon.Unkown,
             Job = Job.Beginner 
+        });
+    }
+
+    [Test]
+    public void should_get_warrior()
+    {
+        var role = _roleService.GenerateRoleBy(new RoleDto
+        {
+            Weapon = Weapon.Sword,
+            Level = 10
+        });
+
+        role.Should().BeEquivalentTo(new RoleDomain()
+        {
+            Level = 10,
+            Weapon = Weapon.Sword,
+            Job = Job.Warrior
         });
     }
 
