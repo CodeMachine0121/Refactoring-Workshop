@@ -6,30 +6,20 @@ public class RoleService: IRoleService
     {
         if (IsMatchMagician(dto))
         {
-            return GetRoleDomain(dto, Job.Magician);
+            return dto.GetRoleDomain(Job.Magician);
         }
         
         if (IsMatchWarrior(dto))
         {
-            return GetRoleDomain(dto, Job.Warrior);
+            return dto.GetRoleDomain(Job.Warrior);
         }
 
-        return GetRoleDomain(dto, Job.Beginner);
+        return dto.GetRoleDomain(Job.Beginner);
     }
 
     private static bool IsMatchWarrior(RoleDto dto)
     {
         return dto.Level >= 10 && dto.Weapon == Weapon.Sword;
-    }
-
-    private static RoleDomain GetRoleDomain(RoleDto dto, Job magician)
-    {
-        return new RoleDomain()
-        {
-            Level = dto.Level,
-            Weapon = dto.Weapon,
-            Job = magician
-        };
     }
 
     private static bool IsMatchMagician(RoleDto dto)
