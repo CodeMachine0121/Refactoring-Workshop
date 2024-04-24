@@ -2,8 +2,13 @@ namespace Intern;
 
 public class RoleService: IRoleService
 {
-    public RoleDomain GenerateRoleBy(RoleDto any)
+    public RoleDomain GenerateRoleBy(RoleDto dto)
     {
-        return new RoleDomain();
+        return new RoleDomain()
+        {
+            Level = dto.Level,
+            Weapon = dto.Weapon,
+            Job = "Beginner"
+        };
     }
 }
