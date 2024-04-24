@@ -4,6 +4,16 @@ public class RoleService: IRoleService
 {
     public RoleDomain GenerateRoleBy(RoleDto dto)
     {
+        if (dto.Level >= 10 && dto.Weapon == Weapon.Stick)
+        {
+            return new RoleDomain()
+            {
+                Level = dto.Level,
+                Weapon = dto.Weapon,
+                Job = Job.Magician
+            };
+        }
+        
         if (dto.Level >= 10 && dto.Weapon == Weapon.Sword)
         {
             return new RoleDomain()
