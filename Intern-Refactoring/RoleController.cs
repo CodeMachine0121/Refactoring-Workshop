@@ -7,7 +7,11 @@ public class RoleController(IRoleService roleService) : ControllerBase
 
     public RoleResponse GetRoleBy(RoleRequest request)
     {
-        var domain = roleService.GenerateRoleBy(new RoleDto());
+        var domain = roleService.GenerateRoleBy(new RoleDto()
+        {
+            Level = request.Level,
+            Weapon = Enum.TryParse<Weapon>(request.Weapon, out var weapon) ? weapon : Weapon.Unkown
+        });
 
         return new RoleResponse()
         {
