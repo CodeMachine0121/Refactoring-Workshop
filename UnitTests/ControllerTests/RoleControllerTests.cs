@@ -1,4 +1,7 @@
+using FluentAssertions;
 using Intern;
+using Intern_Refactoring;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -27,6 +30,33 @@ public class RoleControllerTests
         });
 
         _roleService.Received().GenerateRoleBy(Arg.Any<RoleDto>());
+    }
+
+    [Test]
+    public void should_get_role_with_api_response()
+    {
+        _roleService.GenerateRoleBy(Arg.Any<RoleDto>()).Returns(new RoleDomain()
+        {
+            Level = 10,
+            Weapon = Weapon.Sword,
+            Job = Job.Warrior
+        });
+        
+        var response = _roleController.GetRoleBy(new RoleRequest()
+        {
+            Level = 10,
+            Weapon = "Sword"
+        });
+        
+        response.Should().BeEquivalentTo( new RoleResponse()
+        {
+            Status = ApiStatus.Success,
+            Data = new RoleDomain() {
+                Level = 10,
+                Weapon = Weapon.Sword,
+                Job = Job.Warrior
+            }
+        });
     }
 
 }
