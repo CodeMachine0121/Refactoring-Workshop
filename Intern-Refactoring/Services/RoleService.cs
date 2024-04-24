@@ -6,15 +6,15 @@ public class RoleService: IRoleService
     {
         if (IsMatchMagician(dto))
         {
-            return dto.GetRoleDomain(Job.Magician);
+            return dto.ToRoleDomain(Job.Magician);
         }
         
         if (IsMatchWarrior(dto))
         {
-            return dto.GetRoleDomain(Job.Warrior);
+            return dto.ToRoleDomain(Job.Warrior);
         }
 
-        return dto.GetRoleDomain(Job.Beginner);
+        return dto.ToRoleDomain(Job.Beginner);
     }
 
     private static bool IsMatchWarrior(RoleDto dto)

@@ -5,7 +5,7 @@ public class RoleDto
     public Weapon Weapon { get; set; }
     public int Level { get; set; }
 
-    public RoleDomain GetRoleDomain(Job magician)
+    public RoleDomain ToRoleDomain(Job magician)
     {
         return new RoleDomain()
         {
